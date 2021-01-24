@@ -1,0 +1,72 @@
+{% extends "auctions/layout.html" %} {% load static %} {% block body %}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{% static 'auctions/styles.css' %}" type="text/css" rel="stylesheet">
+</head>
+<h2 style="color:brown;">Listing : {{ title }} </h2>
+
+
+<div class="main-detailed-div">
+    <ul>
+        <li>Product : {{ title }}</li>
+        <li>Price : ${{ bid }}</li>
+        <li> About the product: {{ description }} </li>
+        <li>
+            category :
+            <a href="{% url 'category' category %}">
+                {{ category }}
+            </a>
+
+        </li>
+        {% if not active %}
+        <h2 class="winner">
+            Winner: {{ winner }}
+        </h2>
+        {% endif %}
+        <a>
+            <div style="height: 10px;width: 10px;">
+                <img src="{{ image.url }}"> </img>
+            </div>
+        </a>
+    </ul>
+
+    <p>
+        {% if added %}
+        <a href="{% url 'removewatchlist' auction_id %}"><button class="btn btn-danger">Remove from
+                watchlist</button></a> {% else %}
+        <a href="{% url 'addTowatchlist' auction_id %}"><button class="btn btn-success">Add to
+                watchlist</button></a> {% endif %}
+    </p>
+
+</div>
+<div>
+    <label style="color: cadetblue;font-size: medium;font-weight: 600;font-style: italic;">Previous
+        bids:{{ p_bids }}</label>
+</div>
+<div>
+    <label style="color: cadetblue;font-size: medium;font-weight: 600;font-style: italic;">Highest
+        bid:${{ h_bid }}</label>
+</div>
+{% if active %}
+
+<form method="POST" action="{% url 'addBid' auction_id %}">
+
+    <div>
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="bids" style="color:brown;">Add Bid:</label>
+            <input type="text" class="form-control" name="bids">
+        </div>
+        <button type="submit" class="btn btn-primary">Place Bid</button>
+    </div>
+
+</form>
+
+{% if post_createdBy == request.user.id %}
+<form method="POST" action="{% url 'endAuction' auction_id %}">
+    {% csrf_token %}
+
+    <button type="submit" class="btn btn-danger" style="margin-top: 2%;">End auction</button>
+</form>
+{% endif %} {% endif %} {% endblock %}

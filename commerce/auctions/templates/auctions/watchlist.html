@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html" %} {% block body %}
+<h2>Watchlist</h2>
+
+{% for listing in watchlist %}
+<a href="detailedView/{{ listing.pk }}">
+    <div class="main-watchlist-div">
+        <div style="float: right;width:70%;">
+            <ul>
+                <li>Product Name: {{ listing.title }}</li>
+                <li>Price:${{ listing.bid }}</li>
+                <li>Description:{{ listing.description }} </li>
+            </ul>
+        </div>
+        <div>
+            <img src="{{ listing.image.url }}" style="width: 200px;height: 200px;border-radius: 100px;"> </img>
+
+        </div>
+        <div style="float: right;">
+            <a href="{% url 'removewatchlist' listing.id %}"><button class="btn btn-danger">Remove from watchlist</button></a>
+        </div>
+    </div>
+</a>
+{% endfor %} {% endblock %}

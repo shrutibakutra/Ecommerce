@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %} {% block body %} {% for listing in category %}
+
+<h2 style="color:brown;"> Category : {{ listing.category }}</h2>
+
+
+<div class="main-detailed-div">
+    <div style="float: right;width:70%;">
+
+        <ul>
+            <li>Product : {{ listing.title }}</li>
+            <li>Price : ${{ listing.bid }}</li>
+            <li> About the product: {{ listing.description }} </li>
+            <li>
+                Category : {{ listing.category }}
+            </li>
+        </ul>
+    </div>
+    <div>
+        <img src="{{ listing.image.url }}" style="width: 200px;height: 200px;border-radius: 100px;"> </img>
+    </div>
+
+</div>
+
+
+{% endfor %} {% endblock %}

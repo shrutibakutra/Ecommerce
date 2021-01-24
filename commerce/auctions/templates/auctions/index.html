@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %} {% block body %}
+<h2 style="color: brown;">Active Listings</h2>
+<div>
+    {% for listing in AuctionListing %}
+
+    <div class="main-active-div">
+        <div style="float: right;width:50%;">
+            <ul>
+                <a href="detailedView/{{ listing.pk }}">
+
+                    <li style="font-size: larger;font-weight: 400;">{{ listing.title }}</li>
+                </a>
+
+                <li style="font-weight: 600;">Starting Bid: ${{ listing.bid }}</li>
+                <li style="font-weight: 600;">Description: {{ listing.description }} </li>
+            </ul>
+
+        </div>
+        <div>
+            <img src="{{ listing.image.url }}" style="width: 200px;height: 200px;border-radius: 10px;">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
