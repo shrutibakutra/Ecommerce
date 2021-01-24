@@ -1,4 +1,4 @@
-Project Commerce:
+# Project E-Commerce
 
 An eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist". This project was built using Django for backend and HTML for front-end. Data was managed in Django's inbuilt database, SQLite3.Project is mainly focused on back-end.
 
