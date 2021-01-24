@@ -17,4 +17,4 @@ Description:
 5.Categories
 
 
-6.Django Admin Interfac
+6.Django Admin Interface
